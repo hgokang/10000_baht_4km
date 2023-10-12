@@ -1,7 +1,7 @@
 import googlemaps
 
 
-Api = googlemaps.Client(key='AIzaSyAS0YlCIA3Tdyf0QR1L2mctDMm5z4EkxTI')
+Api = googlemaps.Client(key='Test')
 # location = '13.7349125,100.5304545'
 
 find_user_locate = Api.geolocate()
@@ -29,5 +29,5 @@ for i in range(len(result)):
     print(f"Geo_locate : {geo_locate_lat,geo_locate_lng}")
     print(f"ระยะทางทั้งหมด : {distance['rows'][0]['elements'][0]['distance']['text']}")
     print(f"ระยะเวลาที่ใช้ : {distance['rows'][0]['elements'][0]['duration']['text']}")
-    
+
 print(f"จำนวนร้านที่พบ{i}")
