@@ -1,7 +1,7 @@
 import googlemaps
 import json
 
-Api = googlemaps.Client(key='AIzaSyAS0YlCIA3Tdyf0QR1L2mctDMm5z4EkxTI')
+Api = googlemaps.Client(key='API')
 # location = '13.7349125,100.5304545'
 
 find_user_locate = Api.geolocate()
