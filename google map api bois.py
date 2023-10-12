@@ -1,7 +1,7 @@
 import googlemaps
 
 
-Api = googlemaps.Client(key='APIs')
+Api = googlemaps.Client(key='API')
 # location = '13.7349125,100.5304545'
 
 find_user_locate = Api.geolocate()
