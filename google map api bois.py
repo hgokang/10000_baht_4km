@@ -1,5 +1,5 @@
 import googlemaps
-import json
+
 
 Api = googlemaps.Client(key='APIs')
 # location = '13.7349125,100.5304545'
