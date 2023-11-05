@@ -1,7 +1,7 @@
 import googlemaps
 ########### Steamlit input and output ###########    ###    อย่าลืมทำนะไอน้อง   ###
 
-Api = googlemaps.Client(key='#')
+Api = googlemaps.Client(key='keys')
 # location = '13.7349125,100.5304545'
 file = open('resource_api.txt', 'wb')
 find_user_locate = Api.geolocate()                                                          #Api request
