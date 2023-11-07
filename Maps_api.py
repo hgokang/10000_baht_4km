@@ -63,6 +63,5 @@ if __name__ == '__main__':
             location = input("กรอกที่อยู่: ")
         else:
             location = f"{user_location['location']['lat']},{user_location['location']['lng']}"
-        
         shops_nearby = shop_finder.find_shop_nearby(location)
         shop_finder.print_shop_info(shops_nearby, location)
