@@ -15,9 +15,4 @@ class Sort:
         return arr
 
 
-lis = [10.2,10,20.5,15.6]
-
-x = Sort.sort(lis, revese=True)
-print(x)
-
 
