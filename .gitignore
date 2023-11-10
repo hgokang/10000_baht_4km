@@ -13,3 +13,5 @@ requirements.txt
 test.html
 
 api.py
+
+__pycache__/
