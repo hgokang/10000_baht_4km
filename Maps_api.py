@@ -10,7 +10,7 @@ class ShopFinder:
             user_location = self.api.geolocate()
             return user_location
         except Exception as e:
-            print(f"Error getting user location: {str(e)}")
+            print(f"error getting user location: {str(e)}")
             return None
     
     def find_shop_nearby(self, location, radius=4000, keyword='cafe'):
@@ -18,7 +18,7 @@ class ShopFinder:
             places = self.api.places_nearby(location=location, radius=radius, keyword=keyword)
             return places['results']
         except Exception as e:
-            print(f"Error finding shop nearby: {str(e)}")
+            print(f"error finding shop nearby: {str(e)}")
             return []
     
     def get_distance_info(self, origin, destination):
@@ -26,10 +26,11 @@ class ShopFinder:
             distance_info = self.api.distance_matrix(origins=origin, destinations=destination)
             return distance_info
         except Exception as e:
-            print(f"Error getting distance information: {str(e)}")
+            print(f"error getting distance information: {str(e)}")
             return None
     
     def print_shop_info(self, result, user_location):
+        list = []
         for i, shop in enumerate(result):
             name_place = shop['name']
             place_location = shop['vicinity']
@@ -44,24 +45,47 @@ class ShopFinder:
             print(f"\nชื่อร้าน : {name_place}")
             print(f"location : {place_location}")
             print(f"rating : {rate}")
-            print(f"type : {type_}")
             print(f"rating total : {rating_total}")
+            print(f"type : {type_}")
             print(f"Geo_locate : {geo_locate_lat}, {geo_locate_lng}")
             if distance_info:
-                print(f"ระยะทางทั้งหมด : {distance_info['rows'][0]['elements'][0]['distance']['text']}")
-                print(f"ระยะเวลาที่ใช้ : {distance_info['rows'][0]['elements'][0]['duration']['text']}")
-        
-        print(f"จำนวนร้านที่พบ: {i + 1}")
+                list.append({
+                'name' : name_place,
+                'location' : place_location,
+                'rating' : rate,
+                'type' : type_,
+                'rating_total' : rating_total,
+                'geo_locate_lat' : geo_locate_lat,
+                'geo_locate_lng' : geo_locate_lng,
+                'distance' : distance_info['rows'][0]['elements'][0]['distance']['text'],
+                'time' : {distance_info['rows'][0]['elements'][0]['duration']['text']}
+                })
+            if not distance_info:
+                list.append({
+                'name' : name_place,
+                'location' : place_location,
+                'rating' : rate,
+                'type' : type_,
+                'rating_total' : rating_total,
+                'geo_locate_lat' : geo_locate_lat,
+                'geo_locate_lng' : geo_locate_lng,
+                })
 
-if __name__ == '__main__':
-    shop_finder = ShopFinder(api_key)
+        list.append({'total' : i+1})
+        print(f"จำนวนร้านที่พบ: {i + 1}")
+        return list
+        
+
+
+# shop_finder = ShopFinder(api_key)
     
-    user_location = shop_finder.get_user_location()
+# user_location = shop_finder.get_user_location()
     
-    if user_location:
-        if user_location['accuracy'] > 4000:
-            location = input("กรอกที่อยู่: ")
-        else:
-            location = f"{user_location['location']['lat']},{user_location['location']['lng']}"
-        shops_nearby = shop_finder.find_shop_nearby(location)
-        shop_finder.print_shop_info(shops_nearby, location)
+# if user_location:
+#     if user_location['accuracy'] > 4000:
+#         location = input("กรอกที่อยู่: ")
+#     else:
+#         location = f"{user_location['location']['lat']},{user_location['location']['lng']}"
+#     shops_nearby = shop_finder.find_shop_nearby(location)
+#     x = shop_finder.print_shop_info(shops_nearby, location)
+        
